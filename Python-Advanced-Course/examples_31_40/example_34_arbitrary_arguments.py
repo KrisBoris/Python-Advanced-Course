@@ -20,6 +20,7 @@ def display_employee(*args, **kwargs):
         print(f"{key} - {value}", end=" ")
     print()
 
+
 display_name("Albus", "Percival", "Wolfrick", "Brian", "Dumbledore")
 print("------------------------------------------------")
 display_address(street="Baker Street", house="221B", city="London", country="U.K.")
