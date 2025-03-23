@@ -1,1 +1,1 @@
-8:41:25 (61, reading files)
+9:22:20 (66, Python GUI intro)
