@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QCheckBox
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
