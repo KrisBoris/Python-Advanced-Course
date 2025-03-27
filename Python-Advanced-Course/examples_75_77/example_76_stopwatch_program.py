@@ -21,8 +21,19 @@ class Stopwatch(QWidget):
         self.setWindowTitle("Stopwatch App")
         self.setStyleSheet("""
             QLabel, QPushButton{
-                font-size: 50px;
-                font-family: calibri;                
+                font-size: 80px;
+                font-family: calibri;
+                font-weight: bold;                
+                border: 3px solid;
+                border-radius: 20px;
+                padding: 20;
+                margin: 8;                
+            }
+            QPushButton{
+                background-color: hsl(203, 100%, 50%);
+            }
+            QLabel{
+                background-color: white;
             }
         """)
         vbox = QVBoxLayout()
@@ -33,21 +44,43 @@ class Stopwatch(QWidget):
         hbox.addWidget(self.restart_button)
 
         vbox.addWidget(self.time_label)
+        vbox.addLayout(hbox)
+
+        self.time_label.setAlignment(Qt.AlignHCenter)
+
+        self.setLayout(vbox)
+
+        self.start_button.clicked.connect(self.start_timer)
+        self.stop_button.clicked.connect(self.stop_timer)
+        self.restart_button.clicked.connect(self.restart_timer)
+
+        self.timer.timeout.connect(self.update_timer)
 
     def start_timer(self):
-        pass
+        self.timer.start(10)
+        self.start_button.setDisabled(True)
 
     def stop_timer(self):
-        pass
+        self.timer.stop()
+        self.start_button.setDisabled(False)
 
     def restart_timer(self):
-        pass
+        self.stop_timer()
+        self.time = QTime(0, 0, 0, 0)
+        self.time_label.setText(self.format_time(self.time))
+        self.start_button.setDisabled(False)
 
     def update_timer(self):
-        pass
+        self.time_label.setText(self.format_time(self.time))
+        self.time = self.time.addMSecs(10)
 
     def format_time(self, time):
-        pass
+        hours = time.hour()
+        minutes = time.minute()
+        seconds = time.second()
+        milliseconds = time.msec() // 10
+        return f"{hours:02}:{minutes:02}:{seconds:02}.{milliseconds:02}"
+
 
 def start_stopwatch():
     app = QApplication(sys.argv)
